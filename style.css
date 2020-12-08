@@ -1,0 +1,163 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #dec08e;
+}
+
+html {
+    font-size: 65.5%;
+}
+
+body {
+    background-color: #333333;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 10rem;
+}
+
+.container {
+    margin: auto;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-meal {
+    display: flex;
+    align-items: center
+}
+
+.submit-form {
+    display: flex;
+}
+
+.input {
+    width: 350px;
+    height: 40px;
+    padding: 5px;
+    background-color: var(--primary-color);
+    border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.input:focus {
+    outline: none
+}
+
+input::placeholder {
+    color: #313530;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.search-button {
+    background-color: var(--primary-color);
+    color: #313530;
+    height: 40px;
+    width: 40px;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    font-size: 2rem;
+    border-left: 1px solid #8f948d;
+}
+
+.search-button:focus {
+    outline: none;
+}
+
+.random-btn {
+    height: 40px;
+    width: 60px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    font-size: 2rem;
+    margin-left: 7px
+}
+
+.random-btn:focus {
+    outline: none;
+}
+
+.results-heading {
+    font-size: 2.5rem;
+    margin: 30px 0;
+    font-weight: 700;
+    color: white;
+}
+
+.meals {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.meal {
+    width: 180px;
+    height: 180px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.img-meal {
+    width: 100%;
+    height: 100%;
+    border: 5px solid white;
+    border-radius: 3px;
+}
+
+.meal-info {
+    position: absolute;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.61);
+    animation: fadeIn 0.3s linear;
+    display: none;
+    cursor: pointer;
+}
+
+.meal:hover .meal-info {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.single-meal {}
+
+@media (max-width:500px) {
+    .meals {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 5px;
+    }
+}
