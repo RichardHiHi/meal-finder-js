@@ -2,8 +2,9 @@ const searchBTN = document.querySelector(".search-button");
 const input = document.querySelector(".input");
 const formSubmit = document.querySelector(".submit-form");
 const infoMeal = document.querySelector(".meals");
-console.log(infoMeal);
 const resulstHeading = document.querySelector(".results-heading");
+const singleMeal = document.querySelector(".single-meal");
+const randomBtn = document.querySelector(".random-btn");
 
 //get meal by keyword
 function getMeal(e) {
@@ -29,7 +30,7 @@ function getMeal(e) {
                 </div>`;
                     })
                     .join("");
-                // input.value = ``;
+                input.value = ``;
             });
     } else {
         alert("please text ");
@@ -38,7 +39,33 @@ function getMeal(e) {
 
 //add meal to DOM for single meal
 function addMealToDOM(data) {
-    console.log(data.meals[0]);
+    const meal = data.meals[0];
+    let redient = ''
+    for (let i = 1; i <= 20; i++) {
+        const strRedient = `strIngredient${i}`;
+        console.log(strRedient)
+        const strMeasure = `strMeasure${i}`;
+        if (meal[strRedient]) {
+            redient += `<li>` + meal[strRedient] + `-` + meal[strMeasure];
+        }
+    }
+    redient = redient + '</li>';
+    console.log(redient);
+    singleMeal.innerHTML = `<h1>${meal.strMeal}</h1>
+    <img src="${meal.strMealThumb}" class="single-meal-img">
+    <div class="single-meal-info">
+        <p>${meal.strArea}</p>
+        <p>${meal.strCategory}</p>
+    </div>
+    <div class="main-meal">
+        <p>${meal.strInstructions}</p>
+        <h2>Ingredients</h2>
+        <div class="ingredients">
+            <ul>
+                ${redient}
+            </ul>
+        </div>
+    </div>`
 }
 
 //get meal by idMeal
@@ -63,5 +90,16 @@ function displaySingleMeal(e) {
     getMealByIdMeal(mealID);
 }
 
+function displayRandomMeal() {
+    fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
+        .then(response => response.json()).then(data => {
+            resulstHeading.innerHTML = ``;
+            infoMeal.innerHTML = ``;
+            getMealByIdMeal(data.meals[0].idMeal)
+        })
+}
+
+
 formSubmit.addEventListener("submit", getMeal);
 infoMeal.addEventListener("click", displaySingleMeal);
+randomBtn.addEventListener("click", displayRandomMeal);
